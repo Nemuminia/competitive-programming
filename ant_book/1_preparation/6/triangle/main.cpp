@@ -2,10 +2,14 @@
 #include <algorithm>
 #include <string>
 
+#define MAX_A 1000000
+
 using namespace std;
 
+
 int main() {
-    int n, a[100000];
+    int n;
+    static int a[MAX_A];
 
     cin >> n;
     for (int i = 0; i < n; i++){
