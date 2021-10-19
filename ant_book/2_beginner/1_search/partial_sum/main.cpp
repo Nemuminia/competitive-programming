@@ -1,9 +1,9 @@
 #include <iostream>
 #include <algorithm>
 
-#define MAX_N 20
-
 using namespace std;
+
+#define MAX_N 20
 
 int n, a[MAX_N], k;
 
