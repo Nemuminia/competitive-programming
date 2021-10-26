@@ -18,8 +18,9 @@ int main(){
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
             if (s[i-1] == t[j-1]) {
-                lcs[i][j] = max(lcs[i-1][j-1] + 1, max(lcs[i][j-1], lcs[i-1][j]));
+                lcs[i][j] = lcs[i-1][j-1] + 1;
             } else {
+                // もしsの末尾に足さず、tの末尾に足しただけでLCSが+1されるのであれば、そのパターンはsの末尾にだけ足されているときのLCSでカバーされている
                 lcs[i][j] = max(lcs[i][j-1], lcs[i-1][j]);
             }
         }
