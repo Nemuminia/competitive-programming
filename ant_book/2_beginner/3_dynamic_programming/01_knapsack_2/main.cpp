@@ -4,7 +4,9 @@
 using namespace std;
 
 #define MAX_N 100
-#define MAX_W 10001
+#define MAX_W 1000000001
+#define MAX_V 10001
+#define INF 1000000000
 
 int main(){
     int n;
@@ -16,25 +18,31 @@ int main(){
     }
     cin >> W;
 
-    // i番目までの品物を使えるときの重さj以内での価値の最大値
-    static int max_value[MAX_N][MAX_W] = { 0 };
-    for (int i = 0; i < n; i++) {
-        for (int j = 1; j <= W; j++) {
-            if (i > 0) {
-                if (j >= w[i]) {
-                    // i番目の品物を使うか使わないか、どちらか価値が大きい方が価値の最大値になる
-                    max_value[i][j] = max(max_value[i-1][j], max_value[i-1][j-w[i]] + v[i]);
-                } else {
-                    // 重さの制約でi番目の品物を使えない場合は、i-1番目までの品物を使えるときの重さj以内での価値の最大値と等しくなる
-                    max_value[i][j] = max_value[i-1][j];
-                }
-            } else {
-                if (j >= w[i]) max_value[i][j] = v[i];
-            }
+    // i番目までの品物を使えるときの価値jを構成する重さの最小値
+    static long long int min_weight[MAX_V][MAX_N] = { INF };
+    int ans = 0;
+    for (int i = 1; i < MAX_V; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << "i: " << i << endl;
+            cout << "j: " << j << endl;
+            cout << "min_weight[i][j]: " << min_weight[i][j] << endl;
+            // if (j = 0) {
+            //     if (i == v[j]) {
+            //         min_weight[i][j] = w[j];
+            //     }
+            // } else if(i >= v[j]) {
+            //     min_weight[i][j] = min(min_weight[i][j - 1], min_weight[i - v[j]][j - 1] + w[j]);
+            // }
         }
     }
 
-    cout << max_value[n - 1][W] << endl;
+    for (int i = 1; i < MAX_V; i++) {
+        if (min_weight[n - 1][i] <= W) {
+            ans = i;
+        }
+    }
+
+    cout << ans << endl;
 
     return 0;
 }

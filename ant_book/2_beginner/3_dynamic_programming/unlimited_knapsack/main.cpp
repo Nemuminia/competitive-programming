@@ -4,7 +4,7 @@
 using namespace std;
 
 #define MAX_N 100
-#define MAX_W 1000000000
+#define MAX_W 10001
 
 int main(){
     int n;
@@ -17,17 +17,17 @@ int main(){
     }
     cin >> W;
 
-    int dp[MAX_W+1] = { 0 };
+    int max_value[MAX_W] = { 0 };
 
-    for (int i = 1; i <= W; i++) {
+    for (int i = 1; i < W; i++) {
         for(int j = 0; j < n; j++) {
             if(i - w[j] >= 0) {
-                dp[i] = max(dp[i], dp[i - w[j]] + v[j]);
+                max_value[i] = max(max_value[i], max_value[i - w[j]] + v[j]);
             }
         }
     }
 
-    cout << dp[W] << endl;
+    cout << max_value[W] << endl;
 
     return 0;
 }
